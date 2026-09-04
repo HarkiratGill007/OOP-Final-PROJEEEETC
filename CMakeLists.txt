@@ -12,7 +12,8 @@ FetchContent_Declare(ftxui
 FetchContent_MakeAvailable(ftxui)
 
 file(GLOB SOURCES "*.cpp")
-add_executable(game ${SOURCES})
+add_executable(game ${SOURCES}
+  inventory.cpp)
 
 target_link_libraries(game
   PRIVATE ftxui::screen

@@ -8,14 +8,23 @@
 //     lendable,
 
 // };
+
 class Object{
 
     public:
+
     Object(Category _category , std::string _name ,std::string _description, Region _origin , int _qty=0) :category(_category), name(_name) ,description(_description), origin(_origin) , qty(_qty) {}
+    virtual ~Object() {}
     const Category category;
     virtual std::string use() = 0;
+    void decrement();
+    int get_qty();
+    std::string get_name();
+    void increment();
+    std::string get_description();
 
     protected:
+
     const std::string name;
     const std::string description;
     const Region origin ;
