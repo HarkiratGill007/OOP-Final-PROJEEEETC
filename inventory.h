@@ -14,5 +14,5 @@ class Inventory{
     void i_decrement();
     std::string drop(std::string);
     std::string grab(Object* obj);
-    std::string useItem(std::string _name);
+    std::string Inventory::useItem(std::string _name);
 };
