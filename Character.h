@@ -9,7 +9,7 @@ class Mortal{
     int energy ;
     char gender ;
     Mortal(std::string _name , int _age , int _ene , char _gen): name(_name) , age(_age) ,energy(_ene), gender(_gen){};
-    virtual std::string add_energy_signed(int amount);//used for decraeasing too
+    virtual std::string add_energy_signed(int amount) = 0;//used for decraeasing too
 };
 
 class MainChar : public Mortal{
