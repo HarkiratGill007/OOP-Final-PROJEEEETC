@@ -26,4 +26,4 @@ class SideChar : public Mortal{
     Inventory sc_inventory;
     std::string add_energy_signed(int amount) override;
 
-};//if needed changedetails can b e added later
+};//if needed change_details can be added later
