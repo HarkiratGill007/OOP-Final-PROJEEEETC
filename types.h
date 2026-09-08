@@ -1,4 +1,9 @@
 #pragma once
+
+enum class Checkpoint{
+    EndofHall,
+    EndofSolar,
+};
 enum class Category{
     consumable,// mediicne potion etc
     applyable,//key etc
