@@ -34,7 +34,7 @@ std ::string SideChar::add_energy_signed(int amt){
 
 std::string MainChar::change_details(std::string new_name , char new_gender  ){
     bool any_change = 0;
-    if (new_name[0] != '\0'){
+    if (!new_name.empty()){
         name = new_name;
         any_change = 1;
     }
