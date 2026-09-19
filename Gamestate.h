@@ -8,10 +8,11 @@
 using json =  nlohmann::json;
 //CHekpoint enum in types.h
 class GameState{
-    private:
-    std::unordered_set<Checkpoint> completedCheckpoints;
+   
 
     public:
+    
+    std::unordered_set<Checkpoint> completedCheckpoints;
     void completeCheckpoint(Checkpoint cp);
     bool hasCompletedCheckpoint(Checkpoint cp) const;
     Checkpoint last_checkpoint;
@@ -22,5 +23,7 @@ class GameState{
     //+ other stateknowledge later including choice based outcomes
 };
 
+
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(GameState ,completedCheckpoints, last_checkpoint , mc_state , sc_state );
 
 std::string save_state(GameState gs);

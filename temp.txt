@@ -1,0 +1,3 @@
+if (j["category"] == "LendableObj"){
+             return new LendableObj(j["name"] , j["description"], j["region"] , j["origin"] , j["qty"]);
+        }

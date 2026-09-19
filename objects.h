@@ -1,5 +1,6 @@
 #pragma once
 #include "types.h"
+#include <nlohmann/json.hpp>
 #include <string>
 // enum class Category{
 //     consumable,
@@ -8,7 +9,7 @@
 //     lendable,
 
 // };
-
+using json = nlohmann::json;
 class Object{
 
     public:
@@ -22,6 +23,8 @@ class Object{
     std::string get_name();
     void increment();
     std::string get_description();
+    virtual json toJson() const = 0;
+
 
     protected:
 
@@ -38,24 +41,31 @@ class Object{
     
 };  //includes all interactables(objetcs that are used at interactable places)
 
+Object* makeObject(const json& j) ;
+
+
 class ConsumableObj : public Object{
     public:
     ConsumableObj(std::string _name ,std::string _description, const Region& _origin, int _qty = 0 ) : Object(Category::consumable,_name ,_description,  _origin ,  _qty){}
     std::string use() override;
+    json toJson() const override;
 };
 
 class ApplyableObj : public Object{
     public:
     ApplyableObj(std::string _name ,std::string _description, const Region& _origin, int _qty = 0 ) : Object(Category::applyable,_name ,_description,  _origin ,  _qty){}
     std::string use() override;
+    json toJson() const override;
 };
 class UsableObj : public Object{
     public:
     UsableObj(std::string _name ,std::string _description, const Region& _origin, int _qty = 0 ) : Object(Category::usable, _name ,_description,  _origin , _qty){}
     std::string use() override;
+    json toJson() const  override;
 };
 class LendableObj : public Object{
     public:
     LendableObj(std::string _name ,std::string _description, const Region& _origin, int _qty = 0 ) : Object(Category::lendable,_name ,_description,  _origin ,  _qty){}
     std::string use() override;
+    json toJson() const override;
 };

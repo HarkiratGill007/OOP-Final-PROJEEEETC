@@ -53,4 +53,19 @@ std::string Inventory::useItem(std::string _name){
     }
     return _name + " not found in inventory.";
 }
-
+//to_json is for obj_arr in inventory , toJson is for obj
+void to_json(json& j , const Inventory& inv){
+    json arr = json::array();
+    for (Object* o : inv.obj_arr){
+        if(o) arr.push_back(o->toJson());
+    }
+    j = {{"items", arr} , {"i_qty" , inv.i_qty}};
+}
+void from_json(const nlohmann::json& j, Inventory& inv) {
+    inv.obj_arr.clear();
+    inv.i_qty = j.value("i_qty", 0);
+    for (const auto& item : j.at("items")) {
+        Object* o = makeObject(item);  // your factory
+        if (o) inv.obj_arr.push_back(o);
+    }
+}
