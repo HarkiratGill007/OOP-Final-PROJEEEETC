@@ -21,9 +21,27 @@ class GameState{
 
     GameState(Checkpoint las_cp , MainChar mc_ , SideChar sc_) : last_checkpoint(las_cp) , mc_state(mc_) , sc_state(sc_){}//+other choice based shi
     //+ other stateknowledge later including choice based outcomes
+
+    friend void to_json(json& j, const GameState& gs) {
+        j = json{
+            {"completedCheckpoints", gs.completedCheckpoints},
+            {"last_checkpoint", gs.last_checkpoint},
+            {"mc_state", gs.mc_state},
+            {"sc_state", gs.sc_state}
+        };
+    }
+
+    friend void from_json(const json& j, GameState& gs) {
+        j.at("completedCheckpoints").get_to(gs.completedCheckpoints);
+        j.at("last_checkpoint").get_to(gs.last_checkpoint);
+        j.at("mc_state").get_to(gs.mc_state);
+        j.at("sc_state").get_to(gs.sc_state);
+    }
 };
 
 
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(GameState ,completedCheckpoints, last_checkpoint , mc_state , sc_state );
+
 
 std::string save_state(GameState gs);
+
+std::string load_state(int id ,  GameState &gs);
