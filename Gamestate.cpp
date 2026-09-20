@@ -17,10 +17,10 @@ bool GameState::hasCompletedCheckpoint(Checkpoint cp) const{
     return completedCheckpoints.count(cp) > 0;
 }
 
-std::string save_state(GameState gs){
+std::string save_state(const GameState& gs){
     json root;
     std::ifstream in("gamestates.json");
-    if (in) in>>root;
+    if (in && in.peek() != EOF) in >> root;
 
     if (!root.contains("saves") || !root["saves"].is_array()){
         root["saves"] = json::array();
@@ -41,7 +41,7 @@ std::string save_state(GameState gs){
     std::ofstream out("gamestates.json");
     if (out) out << root;
 
-    root.dump(4);
+    out << root.dump(4);
 
     return "Game state saved successfully with ID: " + std::to_string(maxid+1);
 }
