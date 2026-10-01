@@ -42,6 +42,6 @@ class GameState{
 
 
 
-std::string save_state(GameState gs);
+std::string save_state(const GameState gs);
 
 std::string load_state(int id ,  GameState &gs);

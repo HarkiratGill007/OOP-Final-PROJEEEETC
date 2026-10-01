@@ -39,9 +39,7 @@ std::string save_state(const GameState& gs){
     root["saves"].push_back(entry);
 
     std::ofstream out("gamestates.json");
-    if (out) out << root;
-
-    out << root.dump(4);
+    if (out) out << root.dump(4);
 
     return "Game state saved successfully with ID: " + std::to_string(maxid+1);
 }
