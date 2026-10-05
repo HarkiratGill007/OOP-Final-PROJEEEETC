@@ -2,6 +2,7 @@
 #include <nlohmann/json.hpp>
 #include "types.h"
 #include <string>
+#include <utility>
 #include <unordered_set>
 #include "Character.h"
 
@@ -19,7 +20,8 @@ class GameState{
     MainChar mc_state;
     SideChar sc_state;
 
-    GameState(Checkpoint las_cp , MainChar mc_ , SideChar sc_) : last_checkpoint(las_cp) , mc_state(mc_) , sc_state(sc_){}//+other choice based shi
+    GameState(Checkpoint las_cp , MainChar mc_ , SideChar sc_) :  last_checkpoint(las_cp) , mc_state(std::move(mc_)) , sc_state(std::move(sc_)){}
+//+other choice based shi
     //+ other stateknowledge later including choice based outcomes
 
     friend void to_json(json& j, const GameState& gs) {
@@ -42,6 +44,6 @@ class GameState{
 
 
 
-std::string save_state(const GameState gs);
+std::string save_state(const GameState &gs);
 
 std::string load_state(int id ,  GameState &gs);

@@ -71,7 +71,7 @@ std::string Inventory::useItem(std::string _name)
 void to_json(json &j, const Inventory &inv)
 {
     json arr = json::array();
-    for (const auto &yo : inv.obj_arr)
+    for (const auto &o : inv.obj_arr)
     {
         if (o)
             arr.push_back(o->toJson());
@@ -84,7 +84,7 @@ void from_json(const nlohmann::json &j, Inventory &inv)
     inv.i_qty = j.value("i_qty", 0);
     for (const auto &item : j.at("items"))
     {
-        Object *o = makeObject(item); // your factory
+        
         std::unique_ptr<Object> o(makeObject(item));
         if (o)
             inv.obj_arr.push_back(std::move(o));
