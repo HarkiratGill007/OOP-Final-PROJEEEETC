@@ -21,6 +21,7 @@ inline Direction opposite(Direction d){
 class Cell{
      public:
      std::string cellid , name;//cellid is coordinates as string , name shall be name , like ordinary tile
+     std::string north , south , east , west;//what the player sees looking each way (free-form description)
      std::unordered_map <Direction , Cell*> connections;
      std::unordered_map <Direction , std::string> lockedBy;//if locked 
      std::unique_ptr<Object> itemHere = nullptr;
@@ -38,5 +39,4 @@ class Cell{
      other->connections[back] = this;
      if (!key.empty()) other->lockedBy[back] = key;
      }
-
 };
